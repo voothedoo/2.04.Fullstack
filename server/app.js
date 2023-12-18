@@ -1,10 +1,12 @@
 import express from "express";
+import cors from "cors";
 import 'dotenv/config';
 import mariadb from "mariadb";
 
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
@@ -30,10 +32,11 @@ let dbConnection = async () => {
 app.get("/show-all", async (req, res) => {
   try {
     const data = await dbConnection();
-    console.log(data[0].title);
-    res.json(data[0].title);
+    console.log(data);
+    res.json(data);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ Error: "Internal server Error" });
   }
 });
 
