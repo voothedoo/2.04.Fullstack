@@ -8,15 +8,20 @@ addButton.addEventListener("click", async (event) => {
     console.log("Error: Title or Content is empty");
     return;
   }
-  await fetch("http://localhost:3000/create", {
-    method: "POST",
-    body: JSON.stringify({
-      title: title.value.trim(),
-      description: content.value.trim(),
-    }),
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8"
-    }
-  });
-  window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+  try {
+    await fetch("http://localhost:3000/create", {
+      method: "POST",
+      body: JSON.stringify({
+        title: title.value.trim(),
+        description: content.value.trim(),
+      }),
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8"
+      }
+    });
+    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+  } catch (err) {
+    console.log(`Error: ${err}`);
+  }
+
 });

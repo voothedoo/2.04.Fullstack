@@ -1,20 +1,4 @@
-const createArticle = (item) => {
-  const main = document.querySelector(".main");
-
-  let div = document.createElement("section");
-  div.classList.add("idea", "section");
-  main.appendChild(div);
-
-  let title = document.createElement("h3");
-  title.classList.add("title");
-  title.textContent = `Idea #${item.id}: ${item.title}`;
-  div.appendChild(title);
-
-  let content = document.createElement("p");
-  content.classList.add("content");
-  content.textContent = `${item.description}`;
-  div.appendChild(content);
-
+const createDateElement = (item, wrapper) => {
   const dateTimeString = item.created_at;
   const dateTime = new Date(dateTimeString);
   const formattedDateTime = new Intl.DateTimeFormat('en-UK', {
@@ -24,18 +8,19 @@ const createArticle = (item) => {
     hour: 'numeric',
     minute: 'numeric',
     second: 'numeric',
-    timeZone: 'UTC', // Specify the time zone if needed
+    timeZone: 'CET',
   }).format(dateTime);
 
   let creationDate = document.createElement("p");
   creationDate.classList.add("date");
   creationDate.textContent = `Added on ${formattedDateTime}`;
-  div.appendChild(creationDate);
-
+  wrapper.appendChild(creationDate);
+};
+const createDeleteButton = (item, buttonWrapper) => {
   let deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete", `button-${item.id}`, "btn");
+  deleteButton.classList.add("delete", "btn");
   deleteButton.textContent = "Delete Idea";
-  div.appendChild(deleteButton);
+  buttonWrapper.appendChild(deleteButton);
   deleteButton.addEventListener("click", async (event) => {
     event.preventDefault();
     try {
@@ -48,6 +33,49 @@ const createArticle = (item) => {
     window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
   });
 };
+const createEditButton = (item, buttonWrapper) => {
+  let editButton = document.createElement("button");
+  editButton.classList.add("edit", "btn");
+  editButton.textContent = "Edit";
+  buttonWrapper.appendChild(editButton);
+  editButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+  });
+};
+const createArticle = (item) => {
+  const main = document.querySelector(".main");
+
+  let div = document.createElement("section");
+  div.classList.add("idea", "section");
+  main.appendChild(div);
+
+  let ideaNo = document.createElement("h3");
+  ideaNo.classList.add("ideaNo");
+  ideaNo.textContent = `Idea # ${item.id}`;
+  div.appendChild(ideaNo);
+
+  let title = document.createElement("h4");
+  title.classList.add("title");
+  title.textContent = `${item.title}`;
+  div.appendChild(title);
+
+  let content = document.createElement("p");
+  content.classList.add("content");
+  content.textContent = `${item.description}`;
+  div.appendChild(content);
+
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("wrapper");
+  div.appendChild(wrapper);
+
+  const buttonWrapper = document.createElement("div");
+  buttonWrapper.classList.add("btn-wrapper");
+  wrapper.appendChild(buttonWrapper);
+
+  createDateElement(item, wrapper);
+  createEditButton(item, buttonWrapper);
+  createDeleteButton(item, buttonWrapper);
+};
 
 (async () => {
   try {
@@ -58,7 +86,7 @@ const createArticle = (item) => {
     });
   }
   catch (error) {
-    console.log(error);
+    console.log(`Error: ${err}`);
   }
 })();
 
