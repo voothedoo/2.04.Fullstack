@@ -39,33 +39,76 @@ const createEditButton = (item, buttonWrapper) => {
   editButton.textContent = "Edit";
   buttonWrapper.appendChild(editButton);
   editButton.addEventListener("click", async (event) => {
+    let div = document.querySelector(`.no${item.id}`);
+    let title = document.querySelector(`.label${item.id}`);
+    let content = document.querySelector(`.description${item.id}`);
+    let wrapper = document.querySelector(`.cover${item.id}`);
     event.preventDefault();
+    if (editButton.textContent === "Edit") {
+      div.removeChild(title);
+      div.removeChild(content);
+      const inputContent = document.createElement("textarea");
+      inputContent.required = true;
+      inputContent.classList.add(`tempContent${item.id}`);
+      inputContent.value = content.textContent;
+      div.insertBefore(inputContent, wrapper);
+      const inputTitle = document.createElement("input");
+      inputTitle.required = true;
+      inputTitle.classList.add(`tempTitle${item.id}`);
+      inputTitle.value = title.textContent;
+      div.insertBefore(inputTitle, inputContent);
+      editButton.textContent = "Save";
+    } else if (editButton.textContent === "Save") {
+      const id = item.id;
+      const title = div.children[1];
+      const content = div.children[2];
+      // if (title.value.trim() === "" || content.value.trim() === "") {
+      //   console.log("Error: Title or Content is empty");
+      //   return;
+      // }
+      try {
+        await fetch("http://localhost:3000/edit", {
+          method: "PUT",
+          body: JSON.stringify({
+            id: id,
+            title: title.value.trim(),
+            description: content.value.trim(),
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8"
+          }
+        });
+        window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+      } catch (err) {
+        console.log(`Error: ${err}`);
+      }
+    }
   });
 };
 const createArticle = (item) => {
   const main = document.querySelector(".main");
 
   let div = document.createElement("section");
-  div.classList.add("idea", "section");
+  div.classList.add(`no${item.id}`, "idea", "section");
   main.appendChild(div);
 
   let ideaNo = document.createElement("h3");
-  ideaNo.classList.add("ideaNo");
+  ideaNo.classList.add(`tought${item.id}`, "ideaNo");
   ideaNo.textContent = `Idea # ${item.id}`;
   div.appendChild(ideaNo);
 
   let title = document.createElement("h4");
-  title.classList.add("title");
+  title.classList.add(`label${item.id}`, "title");
   title.textContent = `${item.title}`;
   div.appendChild(title);
 
   let content = document.createElement("p");
-  content.classList.add("content");
+  content.classList.add(`description${item.id}`, "content");
   content.textContent = `${item.description}`;
   div.appendChild(content);
 
   const wrapper = document.createElement("div");
-  wrapper.classList.add("wrapper");
+  wrapper.classList.add(`cover${item.id}`, "wrapper");
   div.appendChild(wrapper);
 
   const buttonWrapper = document.createElement("div");

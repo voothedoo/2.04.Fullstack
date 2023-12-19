@@ -27,11 +27,22 @@ body header .links-section ul li {
   margin: 0 0.5rem;
 }
 body main .idea.section {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   box-sizing: border-box;
   padding: 1rem;
   border: 1px solid blueviolet;
   margin: 1rem;
+}
+body main .idea.section input {
+  height: 2rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+body main .idea.section textarea {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
 }
 body main .idea.section h3.ideaNo {
   font-size: 1.1rem;

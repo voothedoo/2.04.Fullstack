@@ -80,6 +80,24 @@ app.post("/create", async (req, res) => {
   }
 });
 
+app.put("/edit", async (req, res) => {
+  let connection;
+  try {
+    connection = await pool.getConnection();
+    const prepare = await connection.prepare(
+      "UPDATE ideas SET title = ?, description = ? WHERE id = ?"
+    );
+    console.log(req.body.id, req.body.title, req.body.description);
+    const data = await prepare.execute([req.body.title, req.body.description, req.body.id]);
+    res.json({ succes: true, message: `Data added succesfully` });
+  } catch (err) {
+    console.log(`Error: ${err}`);
+    res.status(500).json({ error: `Internal server error` });
+  } finally {
+    if (connection) connection.end();
+  }
+});
+
 app.delete("/delete/:id", async (req, res) => {
   let connection;
   try {
