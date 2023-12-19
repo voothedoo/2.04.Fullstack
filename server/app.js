@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import 'dotenv/config';
 import mariadb from "mariadb";
-import { log } from "console";
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || localhost;
@@ -87,9 +86,9 @@ app.put("/edit", async (req, res) => {
     const prepare = await connection.prepare(
       "UPDATE ideas SET title = ?, description = ? WHERE id = ?"
     );
-    console.log(req.body.id, req.body.title, req.body.description);
+
     const data = await prepare.execute([req.body.title, req.body.description, req.body.id]);
-    res.json({ succes: true, message: `Data added succesfully` });
+    res.json({ succes: true, message: `Data edited succesfully` });
   } catch (err) {
     console.log(`Error: ${err}`);
     res.status(500).json({ error: `Internal server error` });

@@ -1,20 +1,44 @@
 const createDateElement = (item, wrapper) => {
-  const dateTimeString = item.created_at;
-  const dateTime = new Date(dateTimeString);
-  const formattedDateTime = new Intl.DateTimeFormat('en-UK', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    timeZone: 'CET',
-  }).format(dateTime);
+  if (item.created_at === item.updated_at) {
+    const dateTimeString = item.created_at;
+    const dateTime = new Date(dateTimeString);
+    const formattedDateTime = new Intl.DateTimeFormat('en-UK', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZone: 'CET',
+    }).format(dateTime);
 
-  let creationDate = document.createElement("p");
-  creationDate.classList.add("date");
-  creationDate.textContent = `Added on ${formattedDateTime}`;
-  wrapper.appendChild(creationDate);
+    let creationDate = document.createElement("p");
+    creationDate.classList.add("date");
+    creationDate.textContent = `Added on ${formattedDateTime}`;
+    wrapper.appendChild(creationDate); ateElement("p");
+    creationDate.classList.add("date");
+    creationDate.textContent = `Added on ${formattedDateTime}`;
+    wrapper.appendChild(creationDate);
+  } else {
+    const dateTimeString = item.updated_at;
+    const dateTime = new Date(dateTimeString);
+    const formattedDateTime = new Intl.DateTimeFormat('en-UK', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZone: 'CET',
+    }).format(dateTime);
+
+    let creationDate = document.createElement("p");
+    creationDate.classList.add("date");
+    creationDate.textContent = `Last edited on ${formattedDateTime}`;
+    wrapper.appendChild(creationDate);
+    console.log(false);
+  }
+
 };
 const createDeleteButton = (item, buttonWrapper) => {
   let deleteButton = document.createElement("button");
@@ -62,6 +86,7 @@ const createEditButton = (item, buttonWrapper) => {
       const id = item.id;
       const title = div.children[1];
       const content = div.children[2];
+      console.log(content.value);
       // if (title.value.trim() === "" || content.value.trim() === "") {
       //   console.log("Error: Title or Content is empty");
       //   return;
@@ -71,8 +96,8 @@ const createEditButton = (item, buttonWrapper) => {
           method: "PUT",
           body: JSON.stringify({
             id: id,
-            title: title.value.trim(),
-            description: content.value.trim(),
+            title: title.value,
+            description: content.value,
           }),
           headers: {
             "Content-Type": "application/json; charset=UTF-8"
