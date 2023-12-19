@@ -15,7 +15,7 @@ const createDateElement = (item, wrapper) => {
     let creationDate = document.createElement("p");
     creationDate.classList.add("date");
     creationDate.textContent = `Added on ${formattedDateTime}`;
-    wrapper.appendChild(creationDate); ateElement("p");
+    wrapper.appendChild(creationDate);
     creationDate.classList.add("date");
     creationDate.textContent = `Added on ${formattedDateTime}`;
     wrapper.appendChild(creationDate);
@@ -152,9 +152,8 @@ const createArticle = (item) => {
     data.forEach(item => {
       createArticle(item);
     });
-  }
-  catch (error) {
-    console.log(`Error: ${err}`);
+  } catch (error) {
+    console.log(`Error: ${error}`);
   }
 })();
 

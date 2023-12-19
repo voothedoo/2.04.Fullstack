@@ -23,5 +23,4 @@ addButton.addEventListener("click", async (event) => {
   } catch (err) {
     console.log(`Error: ${err}`);
   }
-
 });
