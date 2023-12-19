@@ -4,6 +4,24 @@
   list-style: none;
 }
 
+body header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem 1rem;
+}
+body header .links-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+body header .links-section ul {
+  display: flex;
+  flex-direction: row;
+}
+body header .links-section ul li {
+  margin: 0 0.5rem;
+}
 body main {
   display: flex;
   flex-direction: row;

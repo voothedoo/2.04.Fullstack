@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 import 'dotenv/config';
 import mariadb from "mariadb";
+import { log } from "console";
 
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || localhost;
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -45,21 +46,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.delete("/delete/:id", async (req, res) => {
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    const rows = await connection.execute("DELETE FROM ideas WHERE id = ?", [req.params.id]);
-    res.json({ success: true, message: `Deleted ${rows.affectedRows} row(s)` });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
-  } finally {
-    if (connection) connection.end();
-  }
-});
-
-
 app.get("/idea/:id", async (req, res) => {
   let connection;
   try {
@@ -71,6 +57,38 @@ app.get("/idea/:id", async (req, res) => {
     res.json(data);
   } catch (err) {
     throw err;
+  } finally {
+    if (connection) connection.end();
+  }
+});
+
+app.post("/create", async (req, res) => {
+  console.log(req.body);
+  let connection;
+  try {
+    connection = await pool.getConnection();
+    const prepare = await connection.prepare(
+      "INSERT INTO ideas (title, description) VALUES (?, ?)"
+    );
+    const data = await prepare.execute([req.body.title, req.body.description]);
+    res.json({ succes: true, message: `Data added succesfully` });
+  } catch (err) {
+    console.log(`ERROR: ${err}`);
+    res.status(500).json({ error: `Internal server error` });
+  } finally {
+    if (connection) connection.end();
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  let connection;
+  try {
+    connection = await pool.getConnection();
+    const rows = await connection.execute("DELETE FROM ideas WHERE id = ?", [req.params.id]);
+    res.json({ success: true, message: `Deleted ${rows.affectedRows} row(s)` });
+  } catch (err) {
+    console.error(`ERROR: ${err}`);
+    res.status(500).json({ error: `Internal server error` });
   } finally {
     if (connection) connection.end();
   }

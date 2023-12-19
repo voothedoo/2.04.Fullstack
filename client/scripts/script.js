@@ -15,7 +15,6 @@ const createArticle = (item) => {
   content.textContent = `${item.description}`;
   div.appendChild(content);
 
-
   const dateTimeString = item.created_at;
   const dateTime = new Date(dateTimeString);
   const formattedDateTime = new Intl.DateTimeFormat('en-UK', {
@@ -37,8 +36,16 @@ const createArticle = (item) => {
   deleteButton.classList.add("delete", `button-${item.id}`, "btn");
   deleteButton.textContent = "Delete Idea";
   div.appendChild(deleteButton);
-  deleteButton.addEventListener("click", async () => {
-    const testing = await fetch(`http://localhost:3000/delete/${item.id}`, { method: "DELETE" });
+  deleteButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    try {
+      await fetch(`http://localhost:3000/delete/${item.id}`, { method: "DELETE" });
+      console.log(`Item with id ${item.id} was deleted successfully`);
+    }
+    catch (err) {
+      console.log(`Error: ${err}`);
+    }
+    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
   });
 };
 
@@ -46,11 +53,8 @@ const createArticle = (item) => {
   try {
     const response = await fetch(`http://localhost:3000/`);
     const data = await response.json();
-    console.log(data);
-
     data.forEach(item => {
       createArticle(item);
-
     });
   }
   catch (error) {

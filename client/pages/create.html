@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add an idea!</title>
     <link rel="stylesheet" href="../styles/create_style.css" />
-    <script src="../scripts/create.js"></script>
+    <script src="../scripts/create.js" defer></script>
   </head>
   <body>
+    <header>
+      <section class="intro-section">
+        <h1>Never miss an idea again</h1>
+        <h2>Each time you have an idea, save it here.</h2>
+      </section>
+      <section class="links-section">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./create.html">Create</a></li>
+        </ul>
+      </section>
+    </header>
     <main>
       <form action="/" method="POST" class="form">
         <label for="title">Title</label>
@@ -20,7 +32,7 @@
           rows="5"
           required
         ></textarea>
-        <button type="submit">Add</button>
+        <button type="submit" id="addButton">Add</button>
       </form>
     </main>
   </body>
