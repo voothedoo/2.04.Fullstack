@@ -4,10 +4,15 @@ import 'dotenv/config';
 import mariadb from "mariadb";
 
 const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+app.listen(PORT, () => {
+  console.log(`Server running on: http://${HOST}:${PORT}`);
+});
+
 
 const pool = mariadb.createPool({
   database: process.env.DB_NAME,
@@ -55,7 +60,7 @@ app.delete("/delete/:id", async (req, res) => {
 });
 
 
-app.delete("/idea/:id", async (req, res) => {
+app.get("/idea/:id", async (req, res) => {
   let connection;
   try {
     connection = await pool.getConnection();
@@ -72,8 +77,3 @@ app.delete("/idea/:id", async (req, res) => {
 });
 
 
-
-
-app.listen(PORT, () => {
-  console.log(`Server running on: http://localhost:${PORT}`);
-});
