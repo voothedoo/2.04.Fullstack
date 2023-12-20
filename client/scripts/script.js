@@ -1,3 +1,49 @@
+const allIdeasHere = document.querySelector(".allIdeasHere");
+const main = document.querySelector(".main");
+
+const createConfirmationModal = async (item) => {
+  const confirmForm = document.createElement("div");
+  confirmForm.classList.add("confirmForm");
+  main.appendChild(confirmForm);
+
+  const confirmationModal = document.createElement("h2");
+  confirmationModal.textContent = "Are you sure you want to delete this idea?";
+  confirmationModal.classList.add("confirmModal");
+  confirmForm.appendChild(confirmationModal);
+
+  const deleteCancelWrapper = document.createElement("div");
+  deleteCancelWrapper.classList.add("deleteCancelWrapper");
+  confirmForm.appendChild(deleteCancelWrapper);
+
+  const deleteModal = document.createElement("button");
+  deleteModal.textContent = "Delete";
+  deleteModal.classList.add("deleteModal");
+  deleteCancelWrapper.appendChild(deleteModal);
+  deleteModal.addEventListener("click", async (event) => {
+    event.preventDefault();
+    console.log(item.id);
+    try {
+      await fetch(`http://localhost:3000/delete/${item.id}`, { method: "DELETE" });
+      console.log(`Item with id ${item.id} was deleted successfully`);
+    }
+    catch (err) {
+      console.log(`Error: ${err}`);
+    }
+    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+  });
+
+
+  const cancelModal = document.createElement("button");
+  cancelModal.textContent = "Cancel";
+  cancelModal.classList.add("cancelModal");
+  deleteCancelWrapper.appendChild(cancelModal);
+  cancelModal.addEventListener("click", (event) => {
+    event.preventDefault();
+    confirmForm.hidden = true;
+    allIdeasHere.hidden = false;
+  });
+};
+
 const createDateElement = (item, wrapper) => {
   if (item.created_at === item.updated_at) {
     const dateTimeString = item.created_at;
@@ -34,7 +80,6 @@ const createDateElement = (item, wrapper) => {
     creationDate.classList.add("date");
     creationDate.textContent = `Last edited on ${formattedDateTime}`;
     wrapper.appendChild(creationDate);
-    console.log(false);
   }
 
 };
@@ -45,14 +90,8 @@ const createDeleteButton = (item, buttonWrapper) => {
   buttonWrapper.appendChild(deleteButton);
   deleteButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    try {
-      await fetch(`http://localhost:3000/delete/${item.id}`, { method: "DELETE" });
-      console.log(`Item with id ${item.id} was deleted successfully`);
-    }
-    catch (err) {
-      console.log(`Error: ${err}`);
-    }
-    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+    createConfirmationModal(item);
+    allIdeasHere.hidden = true;
   });
 };
 const createEditButton = (item, buttonWrapper) => {
@@ -108,12 +147,13 @@ const createEditButton = (item, buttonWrapper) => {
     }
   });
 };
+
 const createArticle = (item) => {
   const main = document.querySelector(".main");
 
   let div = document.createElement("section");
   div.classList.add(`no${item.id}`, "idea", "section");
-  main.appendChild(div);
+  allIdeasHere.appendChild(div);
 
   let ideaNo = document.createElement("h3");
   ideaNo.classList.add(`tought${item.id}`, "ideaNo");

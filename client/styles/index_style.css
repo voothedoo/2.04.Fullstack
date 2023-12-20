@@ -51,6 +51,48 @@ body header .links-section ul li a:focus {
   color: white;
   background-color: blueviolet;
 }
+body main .confirmForm {
+  width: 30rem;
+  background-color: white;
+  border: 1px solid blueviolet;
+  padding: 5rem 1rem;
+  margin: 0 auto;
+}
+body main .confirmForm .confirmModal {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+body main .confirmForm .deleteCancelWrapper {
+  display: flex;
+  justify-content: center;
+}
+body main .confirmForm .deleteCancelWrapper button {
+  margin: 0 2rem;
+  padding: 1rem 3rem;
+  background-color: white;
+  border: 1px solid blueviolet;
+  border-radius: 5rem;
+  font-size: 1.2rem;
+}
+body main .confirmForm .deleteCancelWrapper .deleteModal {
+  background-color: rgb(255, 171, 171);
+  border: 1px solid rgb(146, 60, 60);
+}
+body main .confirmForm .deleteCancelWrapper .deleteModal:focus,
+body main .confirmForm .deleteCancelWrapper .deleteModal:hover {
+  background-color: red;
+  border: 1px solid red;
+  color: white;
+}
+body main .confirmForm .deleteCancelWrapper .cancelModal {
+  color: #392467;
+}
+body main .confirmForm .deleteCancelWrapper .cancelModal:focus,
+body main .confirmForm .deleteCancelWrapper .cancelModal:hover {
+  color: white;
+  background-color: blueviolet;
+}
 body main .idea.section {
   display: flex;
   flex-direction: column;
