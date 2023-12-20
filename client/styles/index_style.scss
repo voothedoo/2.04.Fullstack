@@ -59,7 +59,7 @@ body {
       padding: 1rem;
       border: 1px solid blueviolet;
       margin: 1rem;
-      background-color: #ffe9f2;
+      background-color: rgb(246, 238, 253);
       input {
         height: 2rem;
         font-size: 2rem;
@@ -80,7 +80,10 @@ body {
         padding: 0.5rem;
         font-size: 2rem;
         padding: 1rem 0 1rem 1rem;
-        background-color: #ffc6dc;
+        background-color: rgb(241, 226, 255);
+        color: #0e21a0;
+        font-weight: 400;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       p.content {
         box-sizing: border-box;
@@ -88,7 +91,9 @@ body {
         font-size: 1.3rem;
         padding: 1rem 0 1rem 1rem;
         margin-bottom: 1rem;
-        background-color: #ffd1e3;
+        background-color: rgb(244, 231, 255);
+        color: #0b1974;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       .wrapper {
         display: flex;
