@@ -16,9 +16,7 @@ const createDateElement = (item, wrapper) => {
     creationDate.classList.add("date");
     creationDate.textContent = `Added on ${formattedDateTime}`;
     wrapper.appendChild(creationDate);
-    creationDate.classList.add("date");
-    creationDate.textContent = `Added on ${formattedDateTime}`;
-    wrapper.appendChild(creationDate);
+
   } else {
     const dateTimeString = item.updated_at;
     const dateTime = new Date(dateTimeString);

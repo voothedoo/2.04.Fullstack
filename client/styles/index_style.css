@@ -14,6 +14,18 @@ body header {
   justify-content: space-between;
   margin: 1rem 1rem;
 }
+body header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 100;
+  color: #392467;
+}
+body header h2 {
+  font-size: 1.2rem;
+  font-weight: 100;
+  font-style: italic;
+  color: #392467;
+}
 body header .links-section {
   display: flex;
   flex-direction: column;
@@ -26,6 +38,19 @@ body header .links-section ul {
 body header .links-section ul li {
   margin: 0 0.5rem;
 }
+body header .links-section ul li a {
+  text-decoration: none;
+  border: solid 1px blueviolet;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: blueviolet;
+  background-color: white;
+}
+body header .links-section ul li a:hover,
+body header .links-section ul li a:focus {
+  color: white;
+  background-color: blueviolet;
+}
 body main .idea.section {
   display: flex;
   flex-direction: column;
@@ -34,6 +59,7 @@ body main .idea.section {
   padding: 1rem;
   border: 1px solid blueviolet;
   margin: 1rem;
+  background-color: #ffe9f2;
 }
 body main .idea.section input {
   height: 2rem;
@@ -47,15 +73,23 @@ body main .idea.section textarea {
 body main .idea.section h3.ideaNo {
   font-size: 1.1rem;
   font-style: italic;
-  text-decoration: underline;
+  color: #392467;
+  margin-bottom: 0.3rem;
 }
 body main .idea.section h4.title {
+  box-sizing: border-box;
+  padding: 0.5rem;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  padding: 1rem 0 1rem 1rem;
+  background-color: #ffc6dc;
 }
 body main .idea.section p.content {
+  box-sizing: border-box;
+  padding: 0.5rem;
   font-size: 1.3rem;
-  margin-bottom: 3rem;
+  padding: 1rem 0 1rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #ffd1e3;
 }
 body main .idea.section .wrapper {
   display: flex;

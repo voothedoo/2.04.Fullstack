@@ -12,6 +12,18 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin: 1rem 1rem;
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 100;
+      color: #392467;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 100;
+      font-style: italic;
+      color: #392467;
+    }
     .links-section {
       display: flex;
       flex-direction: column;
@@ -21,6 +33,19 @@ body {
         flex-direction: row;
         li {
           margin: 0 0.5rem;
+          a {
+            text-decoration: none;
+            border: solid 1px blueviolet;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: blueviolet;
+            background-color: white;
+          }
+          a:hover,
+          a:focus {
+            color: white;
+            background-color: blueviolet;
+          }
         }
       }
     }
@@ -34,6 +59,7 @@ body {
       padding: 1rem;
       border: 1px solid blueviolet;
       margin: 1rem;
+      background-color: #ffe9f2;
       input {
         height: 2rem;
         font-size: 2rem;
@@ -46,15 +72,23 @@ body {
       h3.ideaNo {
         font-size: 1.1rem;
         font-style: italic;
-        text-decoration: underline;
+        color: #392467;
+        margin-bottom: 0.3rem;
       }
       h4.title {
+        box-sizing: border-box;
+        padding: 0.5rem;
         font-size: 2rem;
-        margin-bottom: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        background-color: #ffc6dc;
       }
       p.content {
+        box-sizing: border-box;
+        padding: 0.5rem;
         font-size: 1.3rem;
-        margin-bottom: 3rem;
+        padding: 1rem 0 1rem 1rem;
+        margin-bottom: 1rem;
+        background-color: #ffd1e3;
       }
       .wrapper {
         display: flex;

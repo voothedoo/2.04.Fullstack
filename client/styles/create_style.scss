@@ -6,11 +6,24 @@
 }
 
 body {
+  background-color: rgb(244, 232, 255);
   header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 1rem 1rem;
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 100;
+      color: #392467;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 100;
+      font-style: italic;
+      color: #392467;
+    }
     .links-section {
       display: flex;
       flex-direction: column;
@@ -20,6 +33,19 @@ body {
         flex-direction: row;
         li {
           margin: 0 0.5rem;
+          a {
+            text-decoration: none;
+            border: solid 1px blueviolet;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: blueviolet;
+            background-color: white;
+          }
+          a:hover,
+          a:focus {
+            color: white;
+            background-color: blueviolet;
+          }
         }
       }
     }
@@ -34,6 +60,18 @@ body {
       width: 20rem;
       label {
         margin: 0.5rem;
+        color: #392467;
+      }
+      input#title {
+        height: 2rem;
+        font-size: 2rem;
+        border: 1px solid blueviolet;
+      }
+      textarea#content {
+        height: 10rem;
+        font-size: 1.3rem;
+        resize: vertical;
+        border: 1px solid blueviolet;
       }
       button {
         margin-top: 1rem;
@@ -42,7 +80,13 @@ body {
         height: 2rem;
         border: none;
         border-radius: 5rem;
-        color: rgb(255, 255, 255);
+        border: 1px solid blueviolet;
+        background-color: white;
+        color: blueviolet;
+      }
+      button:hover,
+      button:focus {
+        color: white;
         background-color: blueviolet;
       }
     }
