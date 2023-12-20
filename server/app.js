@@ -3,7 +3,7 @@ import cors from "cors";
 import 'dotenv/config';
 import mariadb from "mariadb";
 
-const PORT = process.env.PORT || 3050;
+const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || localhost;
 const app = express();
 app.use(express.json());
