@@ -1,7 +1,7 @@
 const allIdeasHere = document.querySelector(".allIdeasHere");
 const main = document.querySelector(".main");
 
-const createConfirmationModal = async (item) => {
+const createConfirmationModal = (item) => {
   const confirmForm = document.createElement("div");
   confirmForm.classList.add("confirmForm");
   main.appendChild(confirmForm);

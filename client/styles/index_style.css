@@ -56,7 +56,7 @@ body main .confirmForm {
   background-color: white;
   border: 1px solid blueviolet;
   padding: 5rem 1rem;
-  margin: 0 auto;
+  margin: 10rem auto;
 }
 body main .confirmForm .confirmModal {
   font-size: 1.3rem;
