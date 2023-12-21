@@ -1,6 +1,7 @@
 const title = document.querySelector("#title");
 const content = document.querySelector("#content");
 const addButton = document.querySelector("#addButton");
+const host = "https://brilliantminds1-52eg515h.b4a.run";
 
 addButton.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -9,7 +10,7 @@ addButton.addEventListener("click", async (event) => {
     return;
   }
   try {
-    await fetch("http://localhost:3000/create", {
+    await fetch(`${host}/create`, {
       method: "POST",
       body: JSON.stringify({
         title: title.value.trim(),
@@ -19,7 +20,7 @@ addButton.addEventListener("click", async (event) => {
         "Content-Type": "application/json; charset=UTF-8"
       }
     });
-    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+    window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
   } catch (err) {
     console.log(`Error: ${err}`);
   }

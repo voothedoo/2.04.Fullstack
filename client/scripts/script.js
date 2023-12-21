@@ -1,5 +1,6 @@
 const allIdeasHere = document.querySelector(".allIdeasHere");
 const main = document.querySelector(".main");
+const host = "https://brilliantminds1-52eg515h.b4a.run";
 
 const createConfirmationModal = (item) => {
   const confirmForm = document.createElement("div");
@@ -23,13 +24,13 @@ const createConfirmationModal = (item) => {
     event.preventDefault();
     console.log(item.id);
     try {
-      await fetch(`http://localhost:3000/delete/${item.id}`, { method: "DELETE" });
+      await fetch(`${host}/delete/${item.id}`, { method: "DELETE" });
       console.log(`Item with id ${item.id} was deleted successfully`);
     }
     catch (err) {
       console.log(`Error: ${err}`);
     }
-    window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+    window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
   });
 
 
@@ -129,7 +130,7 @@ const createEditButton = (item, buttonWrapper) => {
       //   return;
       // }
       try {
-        await fetch("http://localhost:3000/edit", {
+        await fetch(`${host}/edit`, {
           method: "PUT",
           body: JSON.stringify({
             id: id,
@@ -140,7 +141,7 @@ const createEditButton = (item, buttonWrapper) => {
             "Content-Type": "application/json; charset=UTF-8"
           }
         });
-        window.location.href = "http://127.0.0.1:5500/client/pages/index.html";
+        window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
       } catch (err) {
         console.log(`Error: ${err}`);
       }
@@ -185,7 +186,7 @@ const createArticle = (item) => {
 
 (async () => {
   try {
-    const response = await fetch(`http://localhost:3000/`);
+    const response = await fetch(`${host}`);
     const data = await response.json();
     data.forEach(item => {
       createArticle(item);
