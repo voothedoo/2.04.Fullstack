@@ -20,7 +20,7 @@ addButton.addEventListener("click", async (event) => {
         "Content-Type": "application/json; charset=UTF-8"
       }
     });
-    window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
+    window.location.href = "https://brilliant-minds-site-alex.netlify.app/";
   } catch (err) {
     console.log(`Error: ${err}`);
   }

@@ -22,7 +22,6 @@ const createConfirmationModal = (item) => {
   deleteCancelWrapper.appendChild(deleteModal);
   deleteModal.addEventListener("click", async (event) => {
     event.preventDefault();
-    console.log(item.id);
     try {
       await fetch(`${host}/delete/${item.id}`, { method: "DELETE" });
       console.log(`Item with id ${item.id} was deleted successfully`);
@@ -30,7 +29,7 @@ const createConfirmationModal = (item) => {
     catch (err) {
       console.log(`Error: ${err}`);
     }
-    window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
+    window.location.href = "https://brilliant-minds-site-alex.netlify.app/";
   });
 
 
@@ -124,11 +123,6 @@ const createEditButton = (item, buttonWrapper) => {
       const id = item.id;
       const title = div.children[1];
       const content = div.children[2];
-      console.log(content.value);
-      // if (title.value.trim() === "" || content.value.trim() === "") {
-      //   console.log("Error: Title or Content is empty");
-      //   return;
-      // }
       try {
         await fetch(`${host}/edit`, {
           method: "PUT",
@@ -141,7 +135,7 @@ const createEditButton = (item, buttonWrapper) => {
             "Content-Type": "application/json; charset=UTF-8"
           }
         });
-        window.location.href = "https://brilliant-minds-site-alex.netlify.app/pages/";
+        window.location.href = "https://brilliant-minds-site-alex.netlify.app/";
       } catch (err) {
         console.log(`Error: ${err}`);
       }
@@ -150,11 +144,9 @@ const createEditButton = (item, buttonWrapper) => {
 };
 
 const createArticle = (item) => {
-  const main = document.querySelector(".main");
-
   let div = document.createElement("section");
   div.classList.add(`no${item.id}`, "idea", "section");
-  allIdeasHere.appendChild(div);
+  allIdeasHere.prepend(div);
 
   let ideaNo = document.createElement("h3");
   ideaNo.classList.add(`tought${item.id}`, "ideaNo");
