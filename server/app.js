@@ -67,11 +67,11 @@ app.post("/create", async (req, res) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const prepare = await connection.query(
-      req.body.title
+    const prepare = await connection.prepare(
+      "INSERT INTO ideas (title, description) VALUES (?, ?)"
     );
-    // const data = await prepare.execute([req.body.title, req.body.description]);
-    // res.json({ succes: true, message: `Data added succesfully` });
+    const data = await prepare.execute([req.body.title, req.body.description]);
+    res.json({ succes: true, message: `Data added succesfully` });
   } catch (err) {
     console.log(`ERROR: ${err}`);
     res.status(500).json({ error: `Internal server error` });
